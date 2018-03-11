@@ -243,7 +243,7 @@ export default class DatePicker extends Component {
     const { isOpen } = this.state;
 
     return (
-      <TetherComponent attachment="top center">
+      <TetherComponent className={this.props.wrapperClassName || ''} attachment="top center">
         {this.renderInput()}
         {isOpen ? this.renderCalendar() : null}
       </TetherComponent>
