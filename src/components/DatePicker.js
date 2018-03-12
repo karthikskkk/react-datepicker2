@@ -35,6 +35,8 @@ export default class DatePicker extends Component {
     timePicker: true
   };
 
+  lastValueChange = null;
+
   state = {
     isOpen: false,
     momentValue: this.props.defaultValue || null,
@@ -62,8 +64,7 @@ export default class DatePicker extends Component {
 
     const { momentValue } = this.state;
     if (momentValue && this.props.onChange) {
-      // console.log('onChange setOpen');
-      // this.props.onChange(momentValue);
+        this.handleChange(momentValue);
     }
 
     this.setState({ isOpen });
@@ -100,11 +101,28 @@ export default class DatePicker extends Component {
 
   }
 
+  handleChange(value) {
+
+      if (!this.lastValueChange || !this.lastValueChange.valueOf) {
+          // console.log('change 1');
+          this.lastValueChange = value;
+          this.props.onChange(value);
+          return;
+      }
+
+      if (value.valueOf && value.valueOf() !== this.lastValueChange.valueOf()) {
+          // console.log('change 2');
+          this.lastValueChange = value;
+          this.props.onChange(value);
+      }
+
+  }
+
   setMomentValue(momentValue, doChange) {
     const { inputFormat, isGregorian, timePicker } = this.state;
 
     if (doChange !== false && this.props.onChange) {
-      this.props.onChange(momentValue);
+      this.handleChange(momentValue);
     }
 
     // const inputValue = momentValue.format(inputFormat);
