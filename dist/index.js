@@ -7428,7 +7428,8 @@ var DatePicker = function (_Component) {
     value: function getValue(inputValue, isGregorian, timePicker) {
       if (!inputValue) return '';
       var inputFormat = this.getInputFormat(isGregorian, timePicker);
-      return isGregorian ? inputValue.locale('es').format(inputFormat) : inputValue.locale('fa').format(inputFormat);
+
+      return inputValue.locale('en').format(this.props.inputFormat || inputFormat);
     }
   }, {
     key: 'setOpen',
