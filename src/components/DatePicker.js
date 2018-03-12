@@ -62,7 +62,8 @@ export default class DatePicker extends Component {
 
     const { momentValue } = this.state;
     if (momentValue && this.props.onChange) {
-      this.props.onChange(momentValue);
+      // console.log('onChange setOpen');
+      // this.props.onChange(momentValue);
     }
 
     this.setState({ isOpen });
@@ -70,7 +71,7 @@ export default class DatePicker extends Component {
 
   componentWillMount() {
     if (this.props.value) {
-      this.setMomentValue(this.props.value);
+      this.setMomentValue(this.props.value, false);
     }
   }
 
@@ -99,10 +100,10 @@ export default class DatePicker extends Component {
 
   }
 
-  setMomentValue(momentValue) {
+  setMomentValue(momentValue, doChange) {
     const { inputFormat, isGregorian, timePicker } = this.state;
 
-    if (this.props.onChange) {
+    if (doChange !== false && this.props.onChange) {
       this.props.onChange(momentValue);
     }
 
