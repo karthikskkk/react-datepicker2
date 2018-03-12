@@ -7436,7 +7436,8 @@ var DatePicker = function (_Component) {
       var momentValue = this.state.momentValue;
 
       if (momentValue && this.props.onChange) {
-        this.props.onChange(momentValue);
+        // console.log('onChange setOpen');
+        // this.props.onChange(momentValue);
       }
 
       this.setState({ isOpen: isOpen });
@@ -7445,7 +7446,7 @@ var DatePicker = function (_Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       if (this.props.value) {
-        this.setMomentValue(this.props.value);
+        this.setMomentValue(this.props.value, false);
       }
     }
   }, {
@@ -7475,14 +7476,14 @@ var DatePicker = function (_Component) {
     }
   }, {
     key: 'setMomentValue',
-    value: function setMomentValue(momentValue) {
+    value: function setMomentValue(momentValue, doChange) {
       var _state = this.state,
           inputFormat = _state.inputFormat,
           isGregorian = _state.isGregorian,
           timePicker = _state.timePicker;
 
 
-      if (this.props.onChange) {
+      if (doChange !== false && this.props.onChange) {
         this.props.onChange(momentValue);
       }
 
