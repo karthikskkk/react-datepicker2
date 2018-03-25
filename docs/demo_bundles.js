@@ -8241,7 +8241,7 @@ var DatePicker = function (_Component) {
       args[_key] = arguments[_key];
     }
 
-    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DatePicker.__proto__ || (0, _getPrototypeOf2.default)(DatePicker)).call.apply(_ref, [this].concat(args))), _this), _this.state = {
+    return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_ref = DatePicker.__proto__ || (0, _getPrototypeOf2.default)(DatePicker)).call.apply(_ref, [this].concat(args))), _this), _this.lastValueChange = null, _this.state = {
       isOpen: false,
       momentValue: _this.props.defaultValue || null,
       inputValue: _this.getValue(_this.props.defaultValue, _this.props.isGregorian, _this.props.timePicker),
@@ -8263,7 +8263,8 @@ var DatePicker = function (_Component) {
     value: function getValue(inputValue, isGregorian, timePicker) {
       if (!inputValue) return '';
       var inputFormat = this.getInputFormat(isGregorian, timePicker);
-      return isGregorian ? inputValue.locale('es').format(inputFormat) : inputValue.locale('fa').format(inputFormat);
+
+      return inputValue.locale('en').format(this.props.inputFormat || inputFormat);
     }
   }, {
     key: 'setOpen',
@@ -8271,7 +8272,7 @@ var DatePicker = function (_Component) {
       var momentValue = this.state.momentValue;
 
       if (momentValue && this.props.onChange) {
-        this.props.onChange(momentValue);
+        this.handleChange(momentValue);
       }
 
       this.setState({ isOpen: isOpen });
@@ -8280,7 +8281,7 @@ var DatePicker = function (_Component) {
     key: 'componentWillMount',
     value: function componentWillMount() {
       if (this.props.value) {
-        this.setMomentValue(this.props.value);
+        this.setMomentValue(this.props.value, false);
       }
     }
   }, {
@@ -8309,16 +8310,33 @@ var DatePicker = function (_Component) {
       }
     }
   }, {
+    key: 'handleChange',
+    value: function handleChange(value) {
+
+      if (!this.lastValueChange || !this.lastValueChange.valueOf) {
+        // console.log('change 1');
+        this.lastValueChange = value;
+        this.props.onChange(value);
+        return;
+      }
+
+      if (value.valueOf && value.valueOf() !== this.lastValueChange.valueOf()) {
+        // console.log('change 2');
+        this.lastValueChange = value;
+        this.props.onChange(value);
+      }
+    }
+  }, {
     key: 'setMomentValue',
-    value: function setMomentValue(momentValue) {
+    value: function setMomentValue(momentValue, doChange) {
       var _state = this.state,
           inputFormat = _state.inputFormat,
           isGregorian = _state.isGregorian,
           timePicker = _state.timePicker;
 
 
-      if (this.props.onChange) {
-        this.props.onChange(momentValue);
+      if (doChange !== false && this.props.onChange) {
+        this.handleChange(momentValue);
       }
 
       // const inputValue = momentValue.format(inputFormat);
