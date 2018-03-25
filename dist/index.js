@@ -7668,7 +7668,7 @@ var DatePicker = function (_Component) {
 
       return _react2.default.createElement(
         _reactTether2.default,
-        { className: this.props.wrapperClassName || '', attachment: 'top center' },
+        { className: this.props.wrapperClassName || '', attachment: this.props.pickerPosition || 'top center' },
         this.renderInput(),
         isOpen ? this.renderCalendar() : null
       );
@@ -7688,6 +7688,7 @@ DatePicker.propTypes = {
   max: _react.PropTypes.object,
   defaultMonth: _react.PropTypes.object,
   inputFormat: _react.PropTypes.string,
+  pickerPosition: _react.PropTypes.string,
   removable: _react.PropTypes.bool,
   styles: _react.PropTypes.object,
   calendarStyles: _react.PropTypes.object,
