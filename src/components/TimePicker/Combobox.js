@@ -1,5 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 import Select from './Select';
+import createReactClass from "create-react-class";
 
 const pad = value => value < 10 ? `0${value}` : `${value}`;
 
@@ -17,7 +19,7 @@ const formatOption = (option, disabledOptions) => {
   };
 };
 
-const Combobox = React.createClass({
+const Combobox = createReactClass({
   propTypes: {
     format: PropTypes.string,
     defaultOpenValue: PropTypes.object,
@@ -83,7 +85,7 @@ const Combobox = React.createClass({
       formattedOptions = formattedOptions
         .map(
           option => ({
-            ...option, 
+            ...option,
             label: option.value <= 12 ? option.value : pad(option.value - 12)
           })
         )
@@ -141,7 +143,7 @@ const Combobox = React.createClass({
 
   getAMPMSelect(period) {
     const { prefixCls, showAMPM, defaultOpenValue,isGregorian } = this.props;
-    
+
     if (!showAMPM) {
       return null;
     }
@@ -156,7 +158,7 @@ const Combobox = React.createClass({
         prefixCls={prefixCls}
         options={options}
         selectedIndex={period === 'AM' ? 0 : 1}
-        type="period"   
+        type="period"
         onSelect={this.onItemChange}
         onMouseEnter={this.onEnterSelectPanel.bind(this, 'period')}
       />

@@ -1,7 +1,9 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 import moment from 'moment';
+import createReactClass from "create-react-class";
 
-const Header = React.createClass({
+const Header = createReactClass({
   propTypes: {
     format: PropTypes.string,
     prefixCls: PropTypes.string,

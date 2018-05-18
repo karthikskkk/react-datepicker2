@@ -1,6 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 import ReactDom from 'react-dom';
 import classnames from 'classnames';
+import createReactClass from "create-react-class";
 
 const scrollTo = (element, to, duration) => {
   const requestAnimationFrame = window.requestAnimationFrame ||
@@ -10,7 +12,7 @@ const scrollTo = (element, to, duration) => {
   // jump to target if duration zero
   if (duration <= 0) {
     element.scrollTop = to;
-    return; 
+    return;
   }
   const difference = to - element.scrollTop;
   const perTick = difference / duration * 10;
@@ -22,7 +24,7 @@ const scrollTo = (element, to, duration) => {
   });
 };
 
-const Select = React.createClass({
+const Select = createReactClass({
   propTypes: {
     prefixCls: PropTypes.string,
     options: PropTypes.array,

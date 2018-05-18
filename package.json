@@ -30,6 +30,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "moment-jalaali": "^0.6.1",
+    "prop-types": "^15.6.1",
     "rc-trigger": "^1.9.1",
     "react-onclickoutside": "^5.9.0",
     "react-tether": "^0.5.6"
