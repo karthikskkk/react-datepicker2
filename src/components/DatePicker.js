@@ -21,6 +21,7 @@ export default class DatePicker extends Component {
     max: PropTypes.object,
     defaultMonth: PropTypes.object,
     inputFormat: PropTypes.string,
+    pickerPosition: PropTypes.string,
     removable: PropTypes.bool,
     styles: PropTypes.object,
     calendarStyles: PropTypes.object,
@@ -264,7 +265,7 @@ export default class DatePicker extends Component {
     const { isOpen } = this.state;
 
     return (
-      <TetherComponent className={this.props.wrapperClassName || ''} attachment="top center">
+      <TetherComponent className={this.props.wrapperClassName || ''} attachment={this.props.pickerPosition || 'top center'}>
         {this.renderInput()}
         {isOpen ? this.renderCalendar() : null}
       </TetherComponent>

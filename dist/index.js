@@ -7148,7 +7148,7 @@ exports.f = __webpack_require__(8);
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
- * 
+ *
  */
 
 function makeEmptyFunction(arg) {
@@ -7707,7 +7707,7 @@ var DatePicker = function (_Component) {
 
       return _react2.default.createElement(
         _reactTether2.default,
-        { className: this.props.wrapperClassName || '', attachment: 'top center' },
+        { className: this.props.wrapperClassName || '', attachment: this.props.pickerPosition || 'top center' },
         this.renderInput(),
         isOpen ? this.renderCalendar() : null
       );
