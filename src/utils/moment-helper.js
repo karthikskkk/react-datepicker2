@@ -4,11 +4,11 @@
  * @param month A moment object
  * @returns {Array}
  */
-export function getDaysOfMonth(month, isGregorian) {
+export function getDaysOfMonth(month) {
   const days = [];
 
-  const monthFormat = isGregorian ? 'Month' : 'jMonth';
-  const dayOffset = isGregorian ? 0 : 1;
+  const monthFormat = 'Month';
+  const dayOffset = 0;
 
   const current = month.clone().startOf(monthFormat);
   const end = month.clone().endOf(monthFormat);

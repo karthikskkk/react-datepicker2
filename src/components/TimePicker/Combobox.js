@@ -34,8 +34,7 @@ const Combobox = createReactClass({
     disabledHours: PropTypes.func,
     disabledMinutes: PropTypes.func,
     disabledSeconds: PropTypes.func,
-    onCurrentSelectPanelChange: PropTypes.func,
-    isGregorian: PropTypes.bool
+    onCurrentSelectPanelChange: PropTypes.func
   },
 
   onItemChange(type, itemValue) {
@@ -142,15 +141,15 @@ const Combobox = createReactClass({
   },
 
   getAMPMSelect(period) {
-    const { prefixCls, showAMPM, defaultOpenValue,isGregorian } = this.props;
+    const { prefixCls, showAMPM, defaultOpenValue,} = this.props;
 
     if (!showAMPM) {
       return null;
     }
 
     const options = [
-      {value: 'AM', label: isGregorian?'AM': 'ق.ظ'},
-      {value: 'PM', label: isGregorian?'PM': 'ب.ظ'}
+      {value: 'AM', label: 'AM'},
+      {value: 'PM', label: 'PM'}
     ];
 
     return (

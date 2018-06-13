@@ -1,7 +1,7 @@
 {
   "name": "react-datepicker2",
   "version": "v1.0.0-alpha2",
-  "description": "react datepicker component. (include persian jalaali calendar)",
+  "description": "react datepicker component",
   "main": "dist/index.js",
   "style": "dist/react-datepicker2.min.css",
   "repository": {
@@ -12,9 +12,6 @@
     "react",
     "react-datepicker",
     "react-datepicker2",
-    "react-jalaali-datepicker",
-    "jalaali-datepicker",
-    "jalaali",
     "datepicker",
     "component",
     "react component",
@@ -29,14 +26,15 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "moment-jalaali": "^0.6.1",
+    "moment": "^2.22.2",
     "prop-types": "^15.6.1",
     "rc-trigger": "^1.9.1",
     "react-onclickoutside": "^5.9.0",
-    "react-tether": "^0.5.6"
+    "react-tether": "^0.6.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
+    "babel-eslint": "^8.2.3",
     "babel-jest": "^19.0.0",
     "babel-loader": "^6.4.1",
     "babel-plugin-transform-runtime": "^6.23.0",
@@ -47,25 +45,30 @@
     "babel-preset-stage-0": "^6.22.0",
     "babel-runtime": "^6.23.0",
     "coveralls": "^2.12.0",
-    "enzyme": "^2.8.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.9.1",
     "highlight.js": "^9.10.0",
     "html-webpack-plugin": "^2.28.0",
     "install": "^0.8.7",
     "jest": "^19.0.2",
     "jscoverage": "^0.6.0",
-    "moment": "^2.18.1",
     "nodeunit": "^0.11.0",
     "path": "^0.12.7",
-    "react": "^15.4.2",
-    "react-addons-test-utils": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-syntax-highlight": "^0.0.5",
-    "react-test-renderer": "^15.4.2",
+    "raf": "^3.4.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-syntax-highlight": "^15.3.1",
+    "react-test-renderer": "^16.4.0",
     "webpack": "^2.3.1",
     "webpack-dev-server": "^2.4.2"
   },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/src/setupTests.js"
+  },
   "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   }
 }

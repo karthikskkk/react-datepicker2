@@ -172,15 +172,6 @@
     color: #ffffff;
 }
 
-.calendarContainer.jalaali {
-    direction: rtl;
-}
-
-.calendarContainer.jalaali .dayWrapper {
-    float: right;
-}
-
-
 /*time picker style*/
 
 .time-picker-container {
@@ -197,14 +188,6 @@
 .time-picker-container>.time-picker-panel {
     float: right;
     width: 50%;
-}
-
-.time-picker-container.jalaali>.time-label {
-    float: right;
-}
-
-.time-picker-container.jalaali>.time-picker-panel {
-    float: left;
 }
 
 .rc-time-picker {

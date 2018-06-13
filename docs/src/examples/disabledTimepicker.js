@@ -1,8 +1,9 @@
 import React from 'react'
-import moment from 'moment-jalaali'
+import moment from 'moment'
 import DatePicker from '../../../src/components/DatePicker';
+import createReactClass from "create-react-class";
 
-const component = React.createClass({
+const component = createReactClass({
   getInitialState() {
     return {
       value: moment()
@@ -18,7 +19,7 @@ const component = React.createClass({
 });
 
 const title = 'Disabled Timepicker';
-const code = `const component = React.createClass({
+const code = `const component = createReactClass({
   getInitialState() {
     return {
       value: moment()
@@ -27,7 +28,6 @@ const code = `const component = React.createClass({
   render() {
     return <DatePicker
       timePicker={false}
-      isGregorian={false}
       value={this.state.value}
       onChange={value => this.setState({ value })}
     />

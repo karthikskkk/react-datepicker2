@@ -2,20 +2,19 @@ import React from 'react'
 import hljs from 'highlight.js'
 import CodeExampleComponent from './code_example_component'
 import Highlight from 'react-syntax-highlight';
+import createReactClass from "create-react-class";
 
 import Default from './examples/default'
-import Jalaali from './examples/jalaali'
 import DisabledTimepicker from './examples/disabledTimepicker'
-import SwitchIsGregorian from './examples/switchIsGregorian'
 
-export default React.createClass({
+export default createReactClass({
   displayName: 'exampleComponents',
 
   componentDidMount() {
     hljs.initHighlightingOnLoad()
   },
 
-  examples: [Default, Jalaali, DisabledTimepicker, SwitchIsGregorian],
+  examples: [Default, DisabledTimepicker],
 
   renderExamples() {
     return this.examples.map((example, index) =>

@@ -5,7 +5,7 @@ import DaysOfWeek from './DaysOfWeek';
 import MonthSelector from './MonthSelector';
 import Day from './Day';
 import { getDaysOfMonth } from '../utils/moment-helper';
-import moment from 'moment-jalaali';
+import moment from 'moment';
 import onClickOutside from 'react-onclickoutside';
 import { defaultStyles } from './DefaultStyles';
 
@@ -18,8 +18,7 @@ export class Calendar extends Component {
     defaultMonth: PropTypes.object,
     onSelect: PropTypes.func,
     onClickOutside: PropTypes.func,
-    containerProps: PropTypes.object,
-    isGregorian: PropTypes.bool
+    containerProps: PropTypes.object
   };
 
   static childContextTypes = {
@@ -32,15 +31,13 @@ export class Calendar extends Component {
 
   static defaultProps = {
     styles: defaultStyles,
-    containerProps: {},
-    isGregorian: true
+    containerProps: {}
   };
 
   state = {
     month: this.props.defaultMonth || this.props.selectedDay || moment(this.props.min),
     selectedDay: this.props.selectedDay || null,
-    mode: 'days',
-    isGregorian: this.props.isGregorian
+    mode: 'days'
   };
 
   getChildContext() {
@@ -76,8 +73,7 @@ export class Calendar extends Component {
   }
 
   nextMonth() {
-    const { isGregorian } = this.state;
-    const monthFormat = isGregorian ? 'Month' : 'jMonth';
+    const monthFormat = 'Month';
 
     this.setState({
       month: this.state.month.clone().add(1, monthFormat)
@@ -85,8 +81,7 @@ export class Calendar extends Component {
   }
 
   prevMonth() {
-    const { isGregorian } = this.state;
-    const monthFormat = isGregorian ? 'Month' : 'jMonth';
+    const monthFormat = 'Month';
 
     this.setState({
       month: this.state.month.clone().subtract(1, monthFormat)
@@ -94,8 +89,8 @@ export class Calendar extends Component {
   }
 
   selectDay(selectedDay) {
-    const { month, isGregorian } = this.state;
-    const yearMonthFormat = isGregorian ? 'YYYYMM' : 'jYYYYjMM';
+    const { month } = this.state;
+    const yearMonthFormat = 'YYYYMM';
 
     // Because there's no `m1.isSame(m2, 'jMonth')`
     if (selectedDay.format(yearMonthFormat) !== month.format(yearMonthFormat)) {
@@ -123,13 +118,13 @@ export class Calendar extends Component {
   lastRenderedMonth = null;
 
   renderMonthSelector() {
-    const { month, isGregorian } = this.state;
+    const { month } = this.state;
     const { styles } = this.props;
-    return (<MonthSelector styles={styles} isGregorian={isGregorian} selectedMonth={month} />);
+    return (<MonthSelector styles={styles} selectedMonth={month} />);
   }
 
   renderDays() {
-    const { month, selectedDay, isGregorian } = this.state;
+    const { month, selectedDay } = this.state;
     const { children, min, max, styles, outsideClickIgnoreClass } = this.props;
 
     let days;
@@ -137,20 +132,20 @@ export class Calendar extends Component {
     if (this.lastRenderedMonth === month) {
       days = this.days;
     } else {
-      days = getDaysOfMonth(month, isGregorian);
+      days = getDaysOfMonth(month);
       this.days = days;
       this.lastRenderedMonth = month;
     }
 
-    const monthFormat = isGregorian ? 'MM' : 'jMM';
-    const dateFormat = isGregorian ? 'YYYYMMDD' : 'jYYYYjMMjDD';
+    const monthFormat = 'MM';
+    const dateFormat = 'YYYYMMDD';
 
 
     return (
       <div>
         {children}
-        <DaysViewHeading isGregorian={isGregorian} styles={styles} month={month} />
-        <DaysOfWeek styles={styles} isGregorian={isGregorian} />
+        <DaysViewHeading styles={styles} month={month} />
+        <DaysOfWeek styles={styles} />
         <div className={styles.dayPickerContainer}>
           {
             days.map(day => {
@@ -160,7 +155,6 @@ export class Calendar extends Component {
 
               return (
                 <Day
-                  isGregorian={isGregorian}
                   key={day.format(dateFormat)}
                   onClick={this.handleClickOnDay}
                   day={day}
@@ -187,12 +181,10 @@ export class Calendar extends Component {
       styles,
       className
     } = this.props;
-    const { mode, isGregorian } = this.state;
-
-    const jalaaliClassName = isGregorian ? '' : 'jalaali ';
+    const { mode } = this.state;
 
     return (
-      <div className={styles.calendarContainer + ' ' + jalaaliClassName + className}>
+      <div className={styles.calendarContainer + ' ' + className}>
         {mode === 'monthSelector' ? this.renderMonthSelector() : this.renderDays()}
       </div>
     );

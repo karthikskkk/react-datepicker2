@@ -5,8 +5,7 @@ import { leftArrow, rightArrow } from '../utils/assets';
 
 export default class Heading extends Component {
   static propTypes = {
-    month: PropTypes.object.isRequired,
-    isGregorian: PropTypes.bool
+    month: PropTypes.object.isRequired
   };
 
   static contextTypes = {
@@ -29,7 +28,7 @@ export default class Heading extends Component {
     return (
       <div className={styles.heading}>
         <button className={styles.title} onClick={this.handleMonthClick.bind(this)}>
-          {this.props.isGregorian? month.locale('en').format('MMMM YYYY'):persianNumber(month.locale('fa').format('jMMMM jYYYY')) }
+          {month.locale('en').format('MMMM YYYY')}
         </button>
         <button
           type="button"

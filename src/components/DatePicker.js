@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import moment from 'moment-jalaali';
+import moment from 'moment';
 import TetherComponent from 'react-tether';
 import Calendar from './Calendar';
 import classnames from 'classnames';
 import MyTimePicker from './CustomTimePicker'
 
 export const outsideClickIgnoreClass = 'ignore--click--outside'
-moment.loadPersian();
 
 export default class DatePicker extends Component {
   static propTypes = {
@@ -26,14 +25,12 @@ export default class DatePicker extends Component {
     styles: PropTypes.object,
     calendarStyles: PropTypes.object,
     calendarContainerProps: PropTypes.object,
-    isGregorian: PropTypes.bool,// jalaali or gregorian
     timePicker: PropTypes.bool
   };
 
   static defaultProps = {
     styles: undefined,
     calendarContainerProps: {},
-    isGregorian: true,
     timePicker: true
   };
 
@@ -42,23 +39,22 @@ export default class DatePicker extends Component {
   state = {
     isOpen: false,
     momentValue: this.props.defaultValue || null,
-    inputValue: this.getValue(this.props.defaultValue, this.props.isGregorian, this.props.timePicker),
-    inputFormat: this.props.inputFormat || this.getInputFormat(this.props.isGregorian, this.props.timePicker),
-    isGregorian: this.props.isGregorian,
+    inputValue: this.getValue(this.props.defaultValue, this.props.timePicker),
+    inputFormat: this.props.inputFormat || this.getInputFormat(this.props.timePicker),
     timePicker: this.props.timePicker,
     timePickerComponent: this.props.timePicker ? MyTimePicker : undefined
   };
 
-  getInputFormat(isGregorian, timePicker) {
-    if (timePicker)
-      return isGregorian ? 'YYYY/M/D hh:mm A' : 'jYYYY/jM/jD hh:mm A';
-    return isGregorian ? 'YYYY/M/D' : 'jYYYY/jM/jD';
+  getInputFormat(timePicker) {
+    if (!!timePicker)
+      return 'YYYY/M/D hh:mm A';
+    return 'YYYY/M/D';
   }
 
-  getValue(inputValue, isGregorian, timePicker) {
+  getValue(inputValue, timePicker) {
     if (!inputValue)
       return '';
-    const inputFormat = this.getInputFormat(isGregorian, timePicker);
+    const inputFormat = this.getInputFormat(timePicker);
 
     return inputValue.locale('en').format(this.props.inputFormat || inputFormat);
   }
@@ -83,16 +79,6 @@ export default class DatePicker extends Component {
 
     if ('value' in nextProps && nextProps.value !== this.props.value) {
       this.setMomentValue(nextProps.value);
-    }
-
-    if ('isGregorian' in nextProps && nextProps.isGregorian !== this.props.isGregorian) {
-      const inputFormat = nextProps.isGregorian ? 'YYYY/M/D hh:mm A' : 'jYYYY/jM/jD hh:mm A';
-
-      this.setState({
-        isGregorian: nextProps.isGregorian,
-        inputValue: this.getValue(nextProps.value, nextProps.isGregorian, nextProps.timePicker),
-        inputFormat: inputFormat
-      });
     }
 
     if ('timePicker' in nextProps && nextProps.timePicker !== this.props.timePicker) {
@@ -122,7 +108,7 @@ export default class DatePicker extends Component {
   }
 
   setMomentValue(momentValue, doChange) {
-    const { inputFormat, isGregorian, timePicker } = this.state;
+    const { inputFormat, timePicker } = this.state;
 
     if (doChange !== false && this.props.onChange) {
       this.handleChange(momentValue);
@@ -130,7 +116,7 @@ export default class DatePicker extends Component {
 
     // const inputValue = momentValue.format(inputFormat);
 
-    const inputValue = this.getValue(momentValue, isGregorian, timePicker);
+    const inputValue = this.getValue(momentValue, timePicker);
 
     this.setState({ momentValue, inputValue });
   }
@@ -217,7 +203,7 @@ export default class DatePicker extends Component {
   }
 
   renderCalendar() {
-    const { momentValue, isGregorian, timePickerComponent: TimePicker } = this.state;
+    const { momentValue, timePickerComponent: TimePicker } = this.state;
     const { onChange, min, max, defaultMonth, styles, calendarContainerProps } = this.props;
 
     return (
@@ -232,12 +218,10 @@ export default class DatePicker extends Component {
           outsideClickIgnoreClass={outsideClickIgnoreClass}
           styles={styles}
           containerProps={calendarContainerProps}
-          isGregorian={isGregorian}
         >
           {
             TimePicker ? (
               <TimePicker
-                isGregorian={isGregorian}
                 min={min}
                 max={max}
                 momentValue={momentValue}

@@ -42,8 +42,8 @@ const Picker = createReactClass({
     onOpen: PropTypes.func,
     onClose: PropTypes.func,
     showAMPM: PropTypes.bool,
-    panelClassName: PropTypes.string,
-  isGregorian: PropTypes.bool  },
+    panelClassName: PropTypes.string
+  },
 
   getDefaultProps() {
     return {
@@ -146,11 +146,10 @@ const Picker = createReactClass({
     const {
       prefixCls, placeholder, disabledHours,
       disabledMinutes, disabledSeconds, hideDisabledOptions,
-      allowEmpty, showHour, showSecond, showAMPM, defaultOpenValue, clearText,isGregorian
+      allowEmpty, showHour, showSecond, showAMPM, defaultOpenValue, clearText
     } = this.props;
     return (
       <Panel
-        isGregorian={isGregorian}
         clearText={clearText}
         prefixCls={`${prefixCls}-panel`}
         ref={this.savePanelRef}

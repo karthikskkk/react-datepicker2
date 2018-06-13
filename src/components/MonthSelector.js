@@ -1,26 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import moment from 'moment-jalaali';
+import moment from 'moment';
 import classnames from 'classnames';
 import MonthsViewHeading from './MonthsViewHeading';
-import { persianNumber } from '../utils/persian';
 import { leftArrow, rightArrow } from '../utils/assets';
-
-// List of months
-const monthsJalaali = [
-  'فروردین',
-  'اردیبهشت',
-  'خرداد',
-  'تیر',
-  'مرداد',
-  'شهریور',
-  'مهر',
-  'آبان',
-  'آذر',
-  'دی',
-  'بهمن',
-  'اسفند'
-];
 
 const monthsGregorian = [
   'January',
@@ -40,8 +23,7 @@ const monthsGregorian = [
 export default class MonthSelector extends Component {
   static propTypes = {
     styles: PropTypes.object,
-    selectedMonth: PropTypes.object.isRequired,
-    isGregorian: PropTypes.bool
+    selectedMonth: PropTypes.object.isRequired
   };
 
   static contextTypes = {
@@ -67,23 +49,21 @@ export default class MonthSelector extends Component {
 
   handleClick(key) {
     const { setMonth, setCalendarMode } = this.context;
-    const { isGregorian } = this.props;
-    const monthYearFormat= isGregorian ? 'M-YYYY' : 'jM-jYYYY';
+    const monthYearFormat= 'M-YYYY';
     setMonth(moment(key, monthYearFormat));
     setCalendarMode('days');
   }
 
   render() {
     const { year } = this.state;
-    const { selectedMonth, styles,isGregorian } = this.props;
-              const yearFormat= isGregorian ? 'YYYY' : 'jYYYY';
-    const monthYearFormat= isGregorian ? 'M-YYYY' : 'jM-jYYYY';
-    const months=isGregorian ? monthsGregorian : monthsJalaali;
+    const { selectedMonth, styles } = this.props;
+              const yearFormat= 'YYYY';
+    const monthYearFormat= 'M-YYYY';
+    const months=monthsGregorian;
 
     return (
       <div className="month-selector">
         <MonthsViewHeading
-          isGregorian={ isGregorian }
           styles={styles}
           year={year}
           onNextYear={this.nextYear.bind(this) }

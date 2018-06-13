@@ -36,8 +36,7 @@ const Panel = createReactClass({
     showHour: PropTypes.bool,
     showSecond: PropTypes.bool,
     onClear: PropTypes.func,
-    showAMPM: PropTypes.bool,
-    isGregorian: PropTypes.bool
+    showAMPM: PropTypes.bool
   },
 
   getDefaultProps() {
@@ -80,7 +79,7 @@ const Panel = createReactClass({
 
   render() {
     const {
-      isGregorian,formatter, prefixCls, className, placeholder, disabledHours, disabledMinutes,
+      formatter, prefixCls, className, placeholder, disabledHours, disabledMinutes,
       disabledSeconds, hideDisabledOptions, allowEmpty, showHour, showSecond, showAMPM,
       format, defaultOpenValue, clearText, onEsc,
     } = this.props;
@@ -117,7 +116,6 @@ const Panel = createReactClass({
           allowEmpty={allowEmpty}
         />
         <Combobox
-          isGregorian={isGregorian}
           formatter={formatter}
           prefixCls={prefixCls}
           value={value}

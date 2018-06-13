@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
-import moment from 'moment-jalaali';
+import moment from 'moment';
 import TimePicker from './TimePicker';
 import { outsideClickIgnoreClass } from './DatePicker';
 import { persianNumber } from '../utils/persian';
@@ -12,8 +12,7 @@ const disabledMinutes = () => {
 export default class MyTimePicker extends Component {
   static propTypes = {
     momentValue: PropTypes.object,
-    setMomentValue: PropTypes.func,
-    isGregorian: PropTypes.bool
+    setMomentValue: PropTypes.func
   };
 
   handleChange(value) {
@@ -35,19 +34,16 @@ export default class MyTimePicker extends Component {
   }
 
   render() {
-    const { momentValue,isGregorian } = this.props;
+    const { momentValue } = this.props;
 
-    const jalaaliClassName=isGregorian?'':'jalaali';
-
-    const timeLabel=isGregorian?'time:':'ساعت:';
+    const timeLabel='time:';
 
     return momentValue ? (
-      <div className={`time-picker-container ${jalaaliClassName}`}>
+      <div className={`time-picker-container`}>
         <div className='time-label'>{timeLabel}</div>
         <div className='time-picker-panel'>
           <TimePicker
             showAMPM
-            isGregorian={isGregorian}
             showSecond={false}
             allowEmpty={false}
             value={momentValue}

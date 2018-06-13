@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 import classnames from 'classnames';
-import { persianNumber } from '../utils/persian';
 
 const styles = {
   wrapper: {},
@@ -17,8 +16,7 @@ export default class Day extends Component {
     isCurrentMonth: PropTypes.bool,
     disabled: PropTypes.bool,
     selected: PropTypes.bool,
-    onClick: PropTypes.func,
-    isGregorian: PropTypes.bool
+    onClick: PropTypes.func
   };
 
   shouldComponentUpdate(nextProps) {
@@ -39,7 +37,7 @@ export default class Day extends Component {
   }
 
   render() {
-    const { day, disabled, selected, isCurrentMonth, onClick, styles,isGregorian, ...rest } = this.props;
+    const { day, disabled, selected, isCurrentMonth, onClick, styles, ...rest } = this.props;
 
     const className = classnames(styles.dayWrapper, {
       [styles.selected]: selected,
@@ -54,7 +52,7 @@ export default class Day extends Component {
           disabled={disabled}
           {...rest}
         >
-          { isGregorian?day.format('D'):persianNumber(day.format('jD')) }
+          { day.format('D') }
         </button>
       </div>
     );
